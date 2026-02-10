@@ -36,9 +36,8 @@ export default function Main() {
         setIngredients(prevIngredients => [...prevIngredients, newIngredient])
     }
 
-    function updateRecipe() {
-        // setRecipe('Rezept');
-        setRecipe(getRecipeFromMistral(ingredients).then(x=>x));
+    async function updateRecipe() {
+        setRecipe(await getRecipeFromMistral(ingredients));
         setRecipeShown(true);
     }
 
