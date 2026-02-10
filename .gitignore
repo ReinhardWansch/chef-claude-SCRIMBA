@@ -26,4 +26,5 @@ dist-ssr
 # custom
 temp.md
 playground
+notPublic.js
 
