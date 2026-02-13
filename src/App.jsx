@@ -1,13 +1,11 @@
-import Header from "./Header"
-import Main from "./Main"
-import Test from "./playground/Test"
+import Header from "./components/Header"
+import Main from "./components/Main"
 
 export default function App() {
   return (
     <>
       <Header />
       <Main />
-      {/* <Test /> */}
     </>
   )
 }
