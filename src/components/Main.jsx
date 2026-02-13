@@ -3,29 +3,31 @@ import IngredientsList from "./IngredientsList"
 import ClaudeRecipe from "./ClaudeRecipe"
 import { getRecipeFromMistral } from "../ai"
 
-/**
- * Challenge: Get a recipe from the AI!
- * 
- * This will be a bit harder of a challenge that will require you
- * to think critically and synthesize the skills you've been
- * learning and practicing up to this point.
- * 
- * Using either the `getRecipeFromChefClaude` function or the 
- * `getRecipeFromMistral` function, make it so that when the user
- * clicks "Get a recipe", the text response from the AI is displayed
- * in the <ClaudeRecipe> component.
- * 
- * For now, just have it render the raw markdown that the AI returns,
- * don't worry about making it look nice yet. (We're going to use a
- * package that will render the markdown for us soon.)
- */
-
 export default function Main() {
     const [ingredients, setIngredients] = React.useState(
-        ["all the main spices", "pasta", "ground beef", "tomato paste"]
+        [
+            "Eggplant",
+            "Lemon juice",
+            "Ginger",
+            "Cashew nuts",
+            "Coconut oil"
+        ]
     )
     const [recipeShown, setRecipeShown] = React.useState(false)
-    const [recipe, setRecipe]= React.useState("");
+    const [recipe, setRecipe] = React.useState("");
+    const recipeSection = React.useRef(null)
+
+    React.useEffect(() => {
+        recipeSection.current.scrollIntoView();
+    }, [recipe]);
+
+    /**
+     * Challenge:
+     * Add a new effect that calls `recipeSection.current.scrollIntoView()`
+     * only if recipe is not an empty string and recipeSection.current is not null.
+     * Think carefully about what value(s) you would want to include in
+     * the dependencies array.
+     */
 
     function toggleRecipeShown() {
         setRecipeShown(prevShown => !prevShown)
@@ -55,13 +57,14 @@ export default function Main() {
 
             {ingredients.length > 0 &&
                 <IngredientsList
+                    ref={recipeSection}
                     ingredients={ingredients}
                     toggleRecipeShown={toggleRecipeShown}
-                    handleClick= {updateRecipe}
+                    handleClick={updateRecipe}
                 />
             }
 
-            {recipeShown && <ClaudeRecipe recipe={recipe}/>}
+            {recipeShown && <ClaudeRecipe recipe={recipe} />}
         </main>
     )
 }
